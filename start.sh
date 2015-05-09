@@ -1,4 +1,4 @@
 #!/bin/sh
 
-vagrant up
+vagrant up --provider=vmware_fusion
 vagrant gatling-rsync-auto
