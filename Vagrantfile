@@ -6,8 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "precise32"
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  config.vm.box = "phusion/ubuntu-14.04-amd64"
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3306, host: 33066
@@ -39,6 +38,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.gui = false
      vb.cpus = 2
      vb.memory = 2048
+  end
+  
+  config.vm.provider "vmware" do |vmw|
+    vmw.vmx["memsize"] = "2048"
+    vmw.vmx["numvcpus"] = "2"
   end
 
   config.vm.provision "shell", path: "scripts/provision.sh"
